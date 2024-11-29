@@ -2,7 +2,6 @@ package com.trabalhoArquitetura.trabalho.Controller;
 
 import com.trabalhoArquitetura.trabalho.DTOs.PedidoDTO;
 import com.trabalhoArquitetura.trabalho.Entities.Pedido;
-import com.trabalhoArquitetura.trabalho.Entities.StatusPedido;
 import com.trabalhoArquitetura.trabalho.Services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +32,9 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.getPedidoById(id));
     }
 
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Pedido> updateStatus(@PathVariable Integer id, @RequestParam StatusPedido status) {
-        Pedido pedidoAtualizado = pedidoService.updateStatus(id, status);
-        return ResponseEntity.ok(pedidoAtualizado);
+    @PutMapping("/{id}/confirmar")
+    public ResponseEntity<Pedido> confirmarPedido(@PathVariable Integer id) {
+        Pedido pedidoConfirmado = pedidoService.confirmarPedido(id);
+        return ResponseEntity.ok(pedidoConfirmado);
     }
 }

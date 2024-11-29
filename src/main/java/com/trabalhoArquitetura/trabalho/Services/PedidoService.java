@@ -25,12 +25,18 @@ public class PedidoService {
     }
 
     public Pedido getPedidoById(Integer id) {
-        return pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+        return pedidoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
     }
 
-    public Pedido updateStatus(Integer id, StatusPedido newStatus) {
-        Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-        pedido.setStatus(newStatus);
+    public Pedido confirmarPedido(Integer id) {
+        Pedido pedido = getPedidoById(id);
+
+        if (!pedido.getStatus().equals(StatusPedido.PENDENTE)) {
+            throw new IllegalStateException("O pedido já foi confirmado!");
+        }
+
+        pedido.setStatus(StatusPedido.PAGO);
         return pedidoRepository.save(pedido);
     }
 }
