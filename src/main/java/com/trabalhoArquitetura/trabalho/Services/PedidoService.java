@@ -39,4 +39,7 @@ public class PedidoService {
         pedido.setStatus(StatusPedido.PAGO);
         return pedidoRepository.save(pedido);
     }
+    public List<Pedido> getPedidosByUsuario(Integer idUsuario) {
+        return pedidoRepository.findByIdUsuario(idUsuario);
+    }
 }
