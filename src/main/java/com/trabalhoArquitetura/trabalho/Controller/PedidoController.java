@@ -16,7 +16,7 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @GetMapping("/pedido/usuario/{idUsuario}")
+    @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<List<Pedido>> getPedidosByUsuario(@PathVariable Integer idUsuario) {
     List<Pedido> pedidos = pedidoService.getPedidosByUsuario(idUsuario);
     return ResponseEntity.ok(pedidos);
