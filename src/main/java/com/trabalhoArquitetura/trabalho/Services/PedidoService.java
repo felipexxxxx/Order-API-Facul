@@ -1,6 +1,7 @@
 package com.trabalhoArquitetura.trabalho.Services;
 
 import com.trabalhoArquitetura.trabalho.DTOs.PedidoDTO;
+import com.trabalhoArquitetura.trabalho.DTOs.PedidoResponseDTO;
 import com.trabalhoArquitetura.trabalho.Entities.Pedido;
 import com.trabalhoArquitetura.trabalho.Entities.StatusPedido;
 import com.trabalhoArquitetura.trabalho.Repositories.PedidoRepository;
@@ -39,7 +40,19 @@ public class PedidoService {
         pedido.setStatus(StatusPedido.PAGO);
         return pedidoRepository.save(pedido);
     }
-    public List<Pedido> getPedidosByUsuario(Integer idUsuario) {
-        return pedidoRepository.findByIdUsuario(idUsuario);
+    
+    public List<PedidoResponseDTO> getPedidosByUsuario(Integer idUsuario) {
+        List<Pedido> pedidos = pedidoRepository.findByIdUsuario(idUsuario);
+
+        // Mapeando os pedidos para o DTO
+        return pedidos.stream()
+                .map(pedido -> new PedidoResponseDTO(
+                        pedido.getId(),
+                        pedido.getIdProduto(),
+                        pedido.getValorTotal(),
+                        pedido.getDataCompra(),
+                        pedido.getStatus()
+                ))
+                .toList();
     }
 }

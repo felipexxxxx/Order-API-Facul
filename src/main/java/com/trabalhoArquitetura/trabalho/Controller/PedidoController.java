@@ -1,6 +1,7 @@
 package com.trabalhoArquitetura.trabalho.Controller;
 
 import com.trabalhoArquitetura.trabalho.DTOs.PedidoDTO;
+import com.trabalhoArquitetura.trabalho.DTOs.PedidoResponseDTO;
 import com.trabalhoArquitetura.trabalho.Entities.Pedido;
 import com.trabalhoArquitetura.trabalho.Services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,12 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @GetMapping("/usuario/{idUsuario}")
-    public ResponseEntity<List<Pedido>> getPedidosByUsuario(@PathVariable Integer idUsuario) {
-    List<Pedido> pedidos = pedidoService.getPedidosByUsuario(idUsuario);
+   @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<PedidoResponseDTO>> getPedidosByUsuario(@PathVariable Integer idUsuario) {
+    List<PedidoResponseDTO> pedidos = pedidoService.getPedidosByUsuario(idUsuario);
     return ResponseEntity.ok(pedidos);
 }
+
 
     @PostMapping()
     public ResponseEntity<Pedido> createPedido(@RequestBody PedidoDTO data) {
