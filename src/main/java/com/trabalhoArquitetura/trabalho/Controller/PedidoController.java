@@ -22,7 +22,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
 
-    @GetMapping()
+    @GetMapping("/todos")
     public ResponseEntity<List<Pedido>> getAllPedidos() {
         return ResponseEntity.ok(pedidoService.getAllPedidos());
     }
